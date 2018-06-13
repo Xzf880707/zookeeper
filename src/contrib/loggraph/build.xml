@@ -19,52 +19,52 @@
 
 <project name="loggraph" default="jar">
 
-  <import file="../build-contrib.xml"/>
-  
-  <target name="init" depends="check-contrib,zookeeperbuildcontrib.init" unless="skip.contrib">
-    <echo message="contrib: ${name}"/>
-    <mkdir dir="${build.dir}"/>
-    <antcall target="init-contrib"/>
-  </target>
+    <import file="../build-contrib.xml"/>
 
-  <target name="compile" depends="init,ivy-retrieve,zookeeperbuildcontrib.compile" unless="skip.contrib">
-  </target>
+    <target name="init" depends="check-contrib,zookeeperbuildcontrib.init" unless="skip.contrib">
+        <echo message="contrib: ${name}"/>
+        <mkdir dir="${build.dir}"/>
+        <antcall target="init-contrib"/>
+    </target>
 
-  <target name="setjarname">
-    <property name="jarname" value="${build.dir}/zookeeper-${version}-${name}.jar"/>
-  </target>
+    <target name="compile" depends="init,ivy-retrieve,zookeeperbuildcontrib.compile" unless="skip.contrib">
+    </target>
 
-  <target name="jar" depends="setjarname,compile"  >
-    <jar destfile="${jarname}">
-      <fileset file="${zk.root}/LICENSE.txt" />
-      <fileset dir="${build.classes}" />
-      <fileset dir="web"/>
-      <manifest>
-        <attribute name="Built-By" value="${user.name}"/>
-        <attribute name="Built-At" value="${build.time}"/>
-        <attribute name="Built-On" value="${host.name}" />
-        <attribute name="Implementation-Title" value="org.apache.zookeeper.graph"/>
-        <attribute name="Implementation-Version" value="${revision}"/>
-        <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
-      </manifest>
-    </jar>
-  </target>
-  
-  <target name="test">
-    <echo message="No test target defined for this package" />
-  </target>
-  
+    <target name="setjarname">
+        <property name="jarname" value="${build.dir}/zookeeper-${version}-${name}.jar"/>
+    </target>
 
-  <target name="package" depends="compile, zookeeperbuildcontrib.package" unless="skip.contrib">
-    <echo message="contrib: ${name}"/>
-    
-    <copy file="${basedir}/build.xml" todir="${dist.dir}/contrib/${name}"/>
+    <target name="jar" depends="setjarname,compile">
+        <jar destfile="${jarname}">
+            <fileset file="${zk.root}/LICENSE.txt"/>
+            <fileset dir="${build.classes}"/>
+            <fileset dir="web"/>
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Built-At" value="${build.time}"/>
+                <attribute name="Built-On" value="${host.name}"/>
+                <attribute name="Implementation-Title" value="org.apache.zookeeper.graph"/>
+                <attribute name="Implementation-Version" value="${revision}"/>
+                <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
+            </manifest>
+        </jar>
+    </target>
 
-    <mkdir dir="${dist.dir}/contrib/${name}/src"/>
-    <copy todir="${dist.dir}/contrib/${name}/src">
-      <fileset dir="${basedir}/src"/>
-    </copy>
+    <target name="test">
+        <echo message="No test target defined for this package"/>
+    </target>
 
-  </target>
+
+    <target name="package" depends="compile, zookeeperbuildcontrib.package" unless="skip.contrib">
+        <echo message="contrib: ${name}"/>
+
+        <copy file="${basedir}/build.xml" todir="${dist.dir}/contrib/${name}"/>
+
+        <mkdir dir="${dist.dir}/contrib/${name}/src"/>
+        <copy todir="${dist.dir}/contrib/${name}/src">
+            <fileset dir="${basedir}/src"/>
+        </copy>
+
+    </target>
 
 </project>

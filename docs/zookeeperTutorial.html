@@ -1,238 +1,247 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta content="Apache Forrest" name="Generator">
-<meta name="Forrest-version" content="0.9">
-<meta name="Forrest-skin-name" content="pelt">
-<title>Programming with ZooKeeper - A basic tutorial</title>
-<link type="text/css" href="skin/basic.css" rel="stylesheet">
-<link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
-<link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
-<link type="text/css" href="skin/profile.css" rel="stylesheet">
-<script src="skin/getBlank.js" language="javascript" type="text/javascript"></script><script src="skin/getMenu.js" language="javascript" type="text/javascript"></script><script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
-<link rel="shortcut icon" href="images/favicon.ico">
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="Apache Forrest" name="Generator">
+    <meta name="Forrest-version" content="0.9">
+    <meta name="Forrest-skin-name" content="pelt">
+    <title>Programming with ZooKeeper - A basic tutorial</title>
+    <link type="text/css" href="skin/basic.css" rel="stylesheet">
+    <link media="screen" type="text/css" href="skin/screen.css" rel="stylesheet">
+    <link media="print" type="text/css" href="skin/print.css" rel="stylesheet">
+    <link type="text/css" href="skin/profile.css" rel="stylesheet">
+    <script src="skin/getBlank.js" language="javascript" type="text/javascript"></script>
+    <script src="skin/getMenu.js" language="javascript" type="text/javascript"></script>
+    <script src="skin/fontsize.js" language="javascript" type="text/javascript"></script>
+    <link rel="shortcut icon" href="images/favicon.ico">
 </head>
 <body onload="init()">
 <script type="text/javascript">ndeSetTextSize();</script>
 <div id="top">
-<!--+
-    |breadtrail
-    +-->
-<div class="breadtrail">
-<a href="http://www.apache.org/">Apache</a> &gt; <a href="http://zookeeper.apache.org/">ZooKeeper</a> &gt; <a href="http://zookeeper.apache.org/">ZooKeeper</a><script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
-</div>
-<!--+
-    |header
-    +-->
-<div class="header">
-<!--+
-    |start group logo
-    +-->
-<div class="grouplogo">
-<a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg" title="Apache Hadoop"></a>
-</div>
-<!--+
-    |end group logo
-    +-->
-<!--+
-    |start Project Logo
-    +-->
-<div class="projectlogo">
-<a href="http://zookeeper.apache.org/"><img class="logoImage" alt="ZooKeeper" src="images/zookeeper_small.gif" title="ZooKeeper: distributed coordination"></a>
-</div>
-<!--+
-    |end Project Logo
-    +-->
-<!--+
-    |start Search
-    +-->
-<div class="searchbox">
-<form action="http://www.google.com/search" method="get" class="roundtopsmall">
-<input value="zookeeper.apache.org" name="sitesearch" type="hidden"><input onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text" value="Search the site with google">&nbsp; 
-                    <input name="Search" value="Search" type="submit">
-</form>
-</div>
-<!--+
-    |end search
-    +-->
-<!--+
-    |start Tabs
-    +-->
-<ul id="tabs">
-<li>
-<a class="unselected" href="http://zookeeper.apache.org/">Project</a>
-</li>
-<li>
-<a class="unselected" href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/">Wiki</a>
-</li>
-<li class="current">
-<a class="selected" href="index.html">ZooKeeper 3.6 Documentation</a>
-</li>
-</ul>
-<!--+
-    |end Tabs
-    +-->
-</div>
+    <!--+
+        |breadtrail
+        +-->
+    <div class="breadtrail">
+        <a href="http://www.apache.org/">Apache</a> &gt; <a href="http://zookeeper.apache.org/">ZooKeeper</a> &gt; <a
+            href="http://zookeeper.apache.org/">ZooKeeper</a>
+        <script src="skin/breadcrumbs.js" language="JavaScript" type="text/javascript"></script>
+    </div>
+    <!--+
+        |header
+        +-->
+    <div class="header">
+        <!--+
+            |start group logo
+            +-->
+        <div class="grouplogo">
+            <a href="http://hadoop.apache.org/"><img class="logoImage" alt="Hadoop" src="images/hadoop-logo.jpg"
+                                                     title="Apache Hadoop"></a>
+        </div>
+        <!--+
+            |end group logo
+            +-->
+        <!--+
+            |start Project Logo
+            +-->
+        <div class="projectlogo">
+            <a href="http://zookeeper.apache.org/"><img class="logoImage" alt="ZooKeeper"
+                                                        src="images/zookeeper_small.gif"
+                                                        title="ZooKeeper: distributed coordination"></a>
+        </div>
+        <!--+
+            |end Project Logo
+            +-->
+        <!--+
+            |start Search
+            +-->
+        <div class="searchbox">
+            <form action="http://www.google.com/search" method="get" class="roundtopsmall">
+                <input value="zookeeper.apache.org" name="sitesearch" type="hidden"><input
+                    onFocus="getBlank (this, 'Search the site with google');" size="25" name="q" id="query" type="text"
+                    value="Search the site with google">&nbsp;
+                <input name="Search" value="Search" type="submit">
+            </form>
+        </div>
+        <!--+
+            |end search
+            +-->
+        <!--+
+            |start Tabs
+            +-->
+        <ul id="tabs">
+            <li>
+                <a class="unselected" href="http://zookeeper.apache.org/">Project</a>
+            </li>
+            <li>
+                <a class="unselected" href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/">Wiki</a>
+            </li>
+            <li class="current">
+                <a class="selected" href="index.html">ZooKeeper 3.6 Documentation</a>
+            </li>
+        </ul>
+        <!--+
+            |end Tabs
+            +-->
+    </div>
 </div>
 <div id="main">
-<div id="publishedStrip">
-<!--+
-    |start Subtabs
-    +-->
-<div id="level2tabs"></div>
-<!--+
-    |end Endtabs
-    +-->
-<script type="text/javascript"><!--
-document.write("Last Published: " + document.lastModified);
-//  --></script>
-</div>
-<!--+
-    |breadtrail
-    +-->
-<div class="breadtrail">
+    <div id="publishedStrip">
+        <!--+
+            |start Subtabs
+            +-->
+        <div id="level2tabs"></div>
+        <!--+
+            |end Endtabs
+            +-->
+        <script type="text/javascript"><!--
+        document.write("Last Published: " + document.lastModified);
+        //  --></script>
+    </div>
+    <!--+
+        |breadtrail
+        +-->
+    <div class="breadtrail">
 
-             &nbsp;
-           </div>
-<!--+
-    |start Menu, mainarea
-    +-->
-<!--+
-    |start Menu
-    +-->
-<div id="menu">
-<div onclick="SwitchMenu('menu_1.1', 'skin/')" id="menu_1.1Title" class="menutitle">Overview</div>
-<div id="menu_1.1" class="menuitemgroup">
-<div class="menuitem">
-<a href="index.html">Welcome</a>
-</div>
-<div class="menuitem">
-<a href="zookeeperOver.html">Overview</a>
-</div>
-<div class="menuitem">
-<a href="zookeeperStarted.html">Getting Started</a>
-</div>
-<div class="menuitem">
-<a href="releasenotes.html">Release Notes</a>
-</div>
-</div>
-<div onclick="SwitchMenu('menu_selected_1.2', 'skin/')" id="menu_selected_1.2Title" class="menutitle" style="background-image: url('skin/images/chapter_open.gif');">Developer</div>
-<div id="menu_selected_1.2" class="selectedmenuitemgroup" style="display: block;">
-<div class="menuitem">
-<a href="api/index.html">API Docs</a>
-</div>
-<div class="menuitem">
-<a href="zookeeperProgrammers.html">Programmer's Guide</a>
-</div>
-<div class="menuitem">
-<a href="javaExample.html">Java Example</a>
-</div>
-<div class="menupage">
-<div class="menupagetitle">Barrier and Queue Tutorial</div>
-</div>
-<div class="menuitem">
-<a href="recipes.html">Recipes</a>
-</div>
-</div>
-<div onclick="SwitchMenu('menu_1.3', 'skin/')" id="menu_1.3Title" class="menutitle">Admin &amp; Ops</div>
-<div id="menu_1.3" class="menuitemgroup">
-<div class="menuitem">
-<a href="zookeeperAdmin.html">Administrator's Guide</a>
-</div>
-<div class="menuitem">
-<a href="zookeeperQuotas.html">Quota Guide</a>
-</div>
-<div class="menuitem">
-<a href="zookeeperJMX.html">JMX</a>
-</div>
-<div class="menuitem">
-<a href="zookeeperObservers.html">Observers Guide</a>
-</div>
-<div class="menuitem">
-<a href="zookeeperReconfig.html">Dynamic Reconfiguration</a>
-</div>
-</div>
-<div onclick="SwitchMenu('menu_1.4', 'skin/')" id="menu_1.4Title" class="menutitle">Contributor</div>
-<div id="menu_1.4" class="menuitemgroup">
-<div class="menuitem">
-<a href="zookeeperInternals.html">ZooKeeper Internals</a>
-</div>
-</div>
-<div onclick="SwitchMenu('menu_1.5', 'skin/')" id="menu_1.5Title" class="menutitle">Miscellaneous</div>
-<div id="menu_1.5" class="menuitemgroup">
-<div class="menuitem">
-<a href="https://cwiki.apache.org/confluence/display/ZOOKEEPER">Wiki</a>
-</div>
-<div class="menuitem">
-<a href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/FAQ">FAQ</a>
-</div>
-<div class="menuitem">
-<a href="http://zookeeper.apache.org/mailing_lists.html">Mailing Lists</a>
-</div>
-</div>
-<div id="credit"></div>
-<div id="roundbottom">
-<img style="display: none" class="corner" height="15" width="15" alt="" src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
-<!--+
-  |alternative credits
-  +-->
-<div id="credit2"></div>
-</div>
-<!--+
-    |end Menu
-    +-->
-<!--+
-    |start content
-    +-->
-<div id="content">
-<div title="Portable Document Format" class="pdflink">
-<a class="dida" href="zookeeperTutorial.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
-        PDF</a>
-</div>
-<h1>Programming with ZooKeeper - A basic tutorial</h1>
-<div id="front-matter">
-<div id="minitoc-area">
-<ul class="minitoc">
-<li>
-<a href="#ch_Introduction">Introduction</a>
-</li>
-<li>
-<a href="#sc_barriers">Barriers</a>
-</li>
-<li>
-<a href="#sc_producerConsumerQueues">Producer-Consumer Queues</a>
-</li>
-<li>
-<a href="#Complete+example">Complete example</a>
-<ul class="minitoc">
-<li>
-<a href="#Queue+test">Queue test</a>
-</li>
-<li>
-<a href="#Barrier+test">Barrier test</a>
-</li>
-<li>
-<a href="#sc_sourceListing">Source Listing</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-  
+        &nbsp;
+    </div>
+    <!--+
+        |start Menu, mainarea
+        +-->
+    <!--+
+        |start Menu
+        +-->
+    <div id="menu">
+        <div onclick="SwitchMenu('menu_1.1', 'skin/')" id="menu_1.1Title" class="menutitle">Overview</div>
+        <div id="menu_1.1" class="menuitemgroup">
+            <div class="menuitem">
+                <a href="index.html">Welcome</a>
+            </div>
+            <div class="menuitem">
+                <a href="zookeeperOver.html">Overview</a>
+            </div>
+            <div class="menuitem">
+                <a href="zookeeperStarted.html">Getting Started</a>
+            </div>
+            <div class="menuitem">
+                <a href="releasenotes.html">Release Notes</a>
+            </div>
+        </div>
+        <div onclick="SwitchMenu('menu_selected_1.2', 'skin/')" id="menu_selected_1.2Title" class="menutitle"
+             style="background-image: url('skin/images/chapter_open.gif');">Developer
+        </div>
+        <div id="menu_selected_1.2" class="selectedmenuitemgroup" style="display: block;">
+            <div class="menuitem">
+                <a href="api/index.html">API Docs</a>
+            </div>
+            <div class="menuitem">
+                <a href="zookeeperProgrammers.html">Programmer's Guide</a>
+            </div>
+            <div class="menuitem">
+                <a href="javaExample.html">Java Example</a>
+            </div>
+            <div class="menupage">
+                <div class="menupagetitle">Barrier and Queue Tutorial</div>
+            </div>
+            <div class="menuitem">
+                <a href="recipes.html">Recipes</a>
+            </div>
+        </div>
+        <div onclick="SwitchMenu('menu_1.3', 'skin/')" id="menu_1.3Title" class="menutitle">Admin &amp; Ops</div>
+        <div id="menu_1.3" class="menuitemgroup">
+            <div class="menuitem">
+                <a href="zookeeperAdmin.html">Administrator's Guide</a>
+            </div>
+            <div class="menuitem">
+                <a href="zookeeperQuotas.html">Quota Guide</a>
+            </div>
+            <div class="menuitem">
+                <a href="zookeeperJMX.html">JMX</a>
+            </div>
+            <div class="menuitem">
+                <a href="zookeeperObservers.html">Observers Guide</a>
+            </div>
+            <div class="menuitem">
+                <a href="zookeeperReconfig.html">Dynamic Reconfiguration</a>
+            </div>
+        </div>
+        <div onclick="SwitchMenu('menu_1.4', 'skin/')" id="menu_1.4Title" class="menutitle">Contributor</div>
+        <div id="menu_1.4" class="menuitemgroup">
+            <div class="menuitem">
+                <a href="zookeeperInternals.html">ZooKeeper Internals</a>
+            </div>
+        </div>
+        <div onclick="SwitchMenu('menu_1.5', 'skin/')" id="menu_1.5Title" class="menutitle">Miscellaneous</div>
+        <div id="menu_1.5" class="menuitemgroup">
+            <div class="menuitem">
+                <a href="https://cwiki.apache.org/confluence/display/ZOOKEEPER">Wiki</a>
+            </div>
+            <div class="menuitem">
+                <a href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/FAQ">FAQ</a>
+            </div>
+            <div class="menuitem">
+                <a href="http://zookeeper.apache.org/mailing_lists.html">Mailing Lists</a>
+            </div>
+        </div>
+        <div id="credit"></div>
+        <div id="roundbottom">
+            <img style="display: none" class="corner" height="15" width="15" alt=""
+                 src="skin/images/rc-b-l-15-1body-2menu-3menu.png"></div>
+        <!--+
+          |alternative credits
+          +-->
+        <div id="credit2"></div>
+    </div>
+    <!--+
+        |end Menu
+        +-->
+    <!--+
+        |start content
+        +-->
+    <div id="content">
+        <div title="Portable Document Format" class="pdflink">
+            <a class="dida" href="zookeeperTutorial.pdf"><img alt="PDF -icon" src="skin/images/pdfdoc.gif" class="skin"><br>
+                PDF</a>
+        </div>
+        <h1>Programming with ZooKeeper - A basic tutorial</h1>
+        <div id="front-matter">
+            <div id="minitoc-area">
+                <ul class="minitoc">
+                    <li>
+                        <a href="#ch_Introduction">Introduction</a>
+                    </li>
+                    <li>
+                        <a href="#sc_barriers">Barriers</a>
+                    </li>
+                    <li>
+                        <a href="#sc_producerConsumerQueues">Producer-Consumer Queues</a>
+                    </li>
+                    <li>
+                        <a href="#Complete+example">Complete example</a>
+                        <ul class="minitoc">
+                            <li>
+                                <a href="#Queue+test">Queue test</a>
+                            </li>
+                            <li>
+                                <a href="#Barrier+test">Barrier test</a>
+                            </li>
+                            <li>
+                                <a href="#sc_sourceListing">Source Listing</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-  
 
-  
-<a name="ch_Introduction"></a>
-<h2 class="h3">Introduction</h2>
-<div class="section">
-<p>In this tutorial, we show simple implementations of barriers and 
-    producer-consumer queues using ZooKeeper. We call the respective classes Barrier and Queue. 
-    These examples assume that you have at least one ZooKeeper server running.</p>
-<p>Both primitives use the following common excerpt of code:</p>
-<pre class="code">
+        <a name="ch_Introduction"></a>
+        <h2 class="h3">Introduction</h2>
+        <div class="section">
+            <p>In this tutorial, we show simple implementations of barriers and
+                producer-consumer queues using ZooKeeper. We call the respective classes Barrier and Queue.
+                These examples assume that you have at least one ZooKeeper server running.</p>
+            <p>Both primitives use the following common excerpt of code:</p>
+            <pre class="code">
     static ZooKeeper zk = null;
     static Integer mutex;
 
@@ -258,56 +267,56 @@ document.write("Last Published: " + document.lastModified);
         }
     }
 </pre>
-<p>Both classes extend SyncPrimitive. In this way, we execute steps that are 
-common to all primitives in the constructor of SyncPrimitive. To keep the examples 
-simple, we create a ZooKeeper object the first time we instantiate either a barrier 
-object or a queue object, and we declare a static variable that is a reference 
-to this object. The subsequent instances of Barrier and Queue check whether a 
-ZooKeeper object exists. Alternatively, we could have the application creating a
-ZooKeeper object and passing it to the constructor of Barrier and Queue.</p>
-<p>
-We use the process() method to process notifications triggered due to watches. 
-In the following discussion, we present code that sets watches. A watch is internal 
-structure that enables ZooKeeper to notify a client of a change to a node. For example, 
-if a client is waiting for other clients to leave a barrier, then it can set a watch and 
-wait for modifications to a particular node, which can indicate that it is the end of the wait. 
-This point becomes clear once we go over the examples.
-</p>
-</div>
-   
- 
-<a name="sc_barriers"></a>
-<h2 class="h3">Barriers</h2>
-<div class="section">
-<p>
- A barrier is a primitive that enables a group of processes to synchronize the 
- beginning and the end of a computation. The general idea of this implementation 
- is to have a barrier node that serves the purpose of being a parent for individual 
- process nodes. Suppose that we call the barrier node "/b1". Each process "p" then 
- creates a node "/b1/p". Once enough processes have created their corresponding 
- nodes, joined processes can start the computation.
- </p>
-<p>In this example, each process instantiates a Barrier object, and its constructor takes as parameters:</p>
-<ul>
-<li>
-<p>the address of a ZooKeeper server (e.g., "zoo1.foo.com:2181")</p>
-</li>
+            <p>Both classes extend SyncPrimitive. In this way, we execute steps that are
+                common to all primitives in the constructor of SyncPrimitive. To keep the examples
+                simple, we create a ZooKeeper object the first time we instantiate either a barrier
+                object or a queue object, and we declare a static variable that is a reference
+                to this object. The subsequent instances of Barrier and Queue check whether a
+                ZooKeeper object exists. Alternatively, we could have the application creating a
+                ZooKeeper object and passing it to the constructor of Barrier and Queue.</p>
+            <p>
+                We use the process() method to process notifications triggered due to watches.
+                In the following discussion, we present code that sets watches. A watch is internal
+                structure that enables ZooKeeper to notify a client of a change to a node. For example,
+                if a client is waiting for other clients to leave a barrier, then it can set a watch and
+                wait for modifications to a particular node, which can indicate that it is the end of the wait.
+                This point becomes clear once we go over the examples.
+            </p>
+        </div>
 
-<li>
-<p>the path of the barrier node on ZooKeeper (e.g., "/b1")</p>
-</li>
 
-<li>
-<p>the size of the group of processes</p>
-</li>
+        <a name="sc_barriers"></a>
+        <h2 class="h3">Barriers</h2>
+        <div class="section">
+            <p>
+                A barrier is a primitive that enables a group of processes to synchronize the
+                beginning and the end of a computation. The general idea of this implementation
+                is to have a barrier node that serves the purpose of being a parent for individual
+                process nodes. Suppose that we call the barrier node "/b1". Each process "p" then
+                creates a node "/b1/p". Once enough processes have created their corresponding
+                nodes, joined processes can start the computation.
+            </p>
+            <p>In this example, each process instantiates a Barrier object, and its constructor takes as parameters:</p>
+            <ul>
+                <li>
+                    <p>the address of a ZooKeeper server (e.g., "zoo1.foo.com:2181")</p>
+                </li>
 
-</ul>
-<p>The constructor of Barrier passes the address of the Zookeeper server to the 
-constructor of the parent class. The parent class creates a ZooKeeper instance if 
-one does not exist. The constructor of Barrier then creates a 
-barrier node on ZooKeeper, which is the parent node of all process nodes, and 
-we call root (<strong>Note:</strong> This is not the ZooKeeper root "/").</p>
-<pre class="code">
+                <li>
+                    <p>the path of the barrier node on ZooKeeper (e.g., "/b1")</p>
+                </li>
+
+                <li>
+                    <p>the size of the group of processes</p>
+                </li>
+
+            </ul>
+            <p>The constructor of Barrier passes the address of the Zookeeper server to the
+                constructor of the parent class. The parent class creates a ZooKeeper instance if
+                one does not exist. The constructor of Barrier then creates a
+                barrier node on ZooKeeper, which is the parent node of all process nodes, and
+                we call root (<strong>Note:</strong> This is not the ZooKeeper root "/").</p>
+            <pre class="code">
         /**
          * Barrier constructor
          *
@@ -346,18 +355,18 @@ we call root (<strong>Note:</strong> This is not the ZooKeeper root "/").</p>
 
         }
 </pre>
-<p>
-To enter the barrier, a process calls enter(). The process creates a node under 
-the root to represent it, using its host name to form the node name. It then wait 
-until enough processes have entered the barrier. A process does it by checking 
-the number of children the root node has with "getChildren()", and waiting for 
-notifications in the case it does not have enough. To receive a notification when 
-there is a change to the root node, a process has to set a watch, and does it 
-through the call to "getChildren()". In the code, we have that "getChildren()" 
-has two parameters. The first one states the node to read from, and the second is
-a boolean flag that enables the process to set a watch. In the code the flag is true.
-</p>
-<pre class="code">
+            <p>
+                To enter the barrier, a process calls enter(). The process creates a node under
+                the root to represent it, using its host name to form the node name. It then wait
+                until enough processes have entered the barrier. A process does it by checking
+                the number of children the root node has with "getChildren()", and waiting for
+                notifications in the case it does not have enough. To receive a notification when
+                there is a change to the root node, a process has to set a watch, and does it
+                through the call to "getChildren()". In the code, we have that "getChildren()"
+                has two parameters. The first one states the node to read from, and the second is
+                a boolean flag that enables the process to set a watch. In the code the flag is true.
+            </p>
+            <pre class="code">
         /**
          * Join barrier
          *
@@ -382,17 +391,17 @@ a boolean flag that enables the process to set a watch. In the code the flag is 
             }
         }
 </pre>
-<p>
-Note that enter() throws both KeeperException and InterruptedException, so it is 
-the responsibility of the application to catch and handle such exceptions.</p>
-<p>
-Once the computation is finished, a process calls leave() to leave the barrier. 
-First it deletes its corresponding node, and then it gets the children of the root 
-node. If there is at least one child, then it waits for a notification (obs: note 
-that the second parameter of the call to getChildren() is true, meaning that 
-ZooKeeper has to set a watch on the the root node). Upon reception of a notification, 
-it checks once more whether the root node has any children.</p>
-<pre class="code">
+            <p>
+                Note that enter() throws both KeeperException and InterruptedException, so it is
+                the responsibility of the application to catch and handle such exceptions.</p>
+            <p>
+                Once the computation is finished, a process calls leave() to leave the barrier.
+                First it deletes its corresponding node, and then it gets the children of the root
+                node. If there is at least one child, then it waits for a notification (obs: note
+                that the second parameter of the call to getChildren() is true, meaning that
+                ZooKeeper has to set a watch on the the root node). Upon reception of a notification,
+                it checks once more whether the root node has any children.</p>
+            <pre class="code">
         /**
          * Wait until all reach barrier
          *
@@ -416,26 +425,26 @@ it checks once more whether the root node has any children.</p>
         }
     }
 </pre>
-</div>
+        </div>
 
-<a name="sc_producerConsumerQueues"></a>
-<h2 class="h3">Producer-Consumer Queues</h2>
-<div class="section">
-<p>
-A producer-consumer queue is a distributed data structure that groups of processes 
-use to generate and consume items. Producer processes create new elements and add 
-them to the queue. Consumer processes remove elements from the list, and process them. 
-In this implementation, the elements are simple integers. The queue is represented 
-by a root node, and to add an element to the queue, a producer process creates a new node, 
-a child of the root node.
-</p>
-<p>
-The following excerpt of code corresponds to the constructor of the object. As 
-with Barrier objects, it first calls the constructor of the parent class, SyncPrimitive, 
-that creates a ZooKeeper object if one doesn't exist. It then verifies if the root 
-node of the queue exists, and creates if it doesn't.
-</p>
-<pre class="code">
+        <a name="sc_producerConsumerQueues"></a>
+        <h2 class="h3">Producer-Consumer Queues</h2>
+        <div class="section">
+            <p>
+                A producer-consumer queue is a distributed data structure that groups of processes
+                use to generate and consume items. Producer processes create new elements and add
+                them to the queue. Consumer processes remove elements from the list, and process them.
+                In this implementation, the elements are simple integers. The queue is represented
+                by a root node, and to add an element to the queue, a producer process creates a new node,
+                a child of the root node.
+            </p>
+            <p>
+                The following excerpt of code corresponds to the constructor of the object. As
+                with Barrier objects, it first calls the constructor of the parent class, SyncPrimitive,
+                that creates a ZooKeeper object if one doesn't exist. It then verifies if the root
+                node of the queue exists, and creates if it doesn't.
+            </p>
+            <pre class="code">
         /**
          * Constructor of producer-consumer queue
          *
@@ -463,15 +472,15 @@ node of the queue exists, and creates if it doesn't.
             }
         }
 </pre>
-<p>
-A producer process calls "produce()" to add an element to the queue, and passes 
-an integer as an argument. To add an element to the queue, the method creates a 
-new node using "create()", and uses the SEQUENCE flag to instruct ZooKeeper to 
-append the value of the sequencer counter associated to the root node. In this way, 
-we impose a total order on the elements of the queue, thus guaranteeing that the 
-oldest element of the queue is the next one consumed.
-</p>
-<pre class="code">
+            <p>
+                A producer process calls "produce()" to add an element to the queue, and passes
+                an integer as an argument. To add an element to the queue, the method creates a
+                new node using "create()", and uses the SEQUENCE flag to instruct ZooKeeper to
+                append the value of the sequencer counter associated to the root node. In this way,
+                we impose a total order on the elements of the queue, thus guaranteeing that the
+                oldest element of the queue is the next one consumed.
+            </p>
+            <pre class="code">
         /**
          * Add element to the queue.
          *
@@ -492,18 +501,18 @@ oldest element of the queue is the next one consumed.
             return true;
         }
 </pre>
-<p>
-To consume an element, a consumer process obtains the children of the root node, 
-reads the node with smallest counter value, and returns the element. Note that 
-if there is a conflict, then one of the two contending processes won't be able to 
-delete the node and the delete operation will throw an exception.</p>
-<p>
-A call to getChildren() returns the list of children in lexicographic order. 
-As lexicographic order does not necessary follow the numerical order of the counter 
-values, we need to decide which element is the smallest. To decide which one has 
-the smallest counter value, we traverse the list, and remove the prefix "element" 
-from each one.</p>
-<pre class="code">
+            <p>
+                To consume an element, a consumer process obtains the children of the root node,
+                reads the node with smallest counter value, and returns the element. Note that
+                if there is a conflict, then one of the two contending processes won't be able to
+                delete the node and the delete operation will throw an exception.</p>
+            <p>
+                A call to getChildren() returns the list of children in lexicographic order.
+                As lexicographic order does not necessary follow the numerical order of the counter
+                values, we need to decide which element is the smallest. To decide which one has
+                the smallest counter value, we traverse the list, and remove the prefix "element"
+                from each one.</p>
+            <pre class="code">
         /**
          * Remove first element from the queue.
          *
@@ -543,46 +552,47 @@ from each one.</p>
         }
     }
 </pre>
-</div>
+        </div>
 
 
-<a name="Complete+example"></a>
-<h2 class="h3">Complete example</h2>
-<div class="section">
-<p>
-In the following section you can find a complete command line application to demonstrate the above mentioned
-recipes. Use the following command to run it.
-</p>
-<pre class="code">
+        <a name="Complete+example"></a>
+        <h2 class="h3">Complete example</h2>
+        <div class="section">
+            <p>
+                In the following section you can find a complete command line application to demonstrate the above
+                mentioned
+                recipes. Use the following command to run it.
+            </p>
+            <pre class="code">
 ZOOBINDIR="[path_to_distro]/bin"
 . "$ZOOBINDIR"/zkEnv.sh
 java SyncPrimitive [Test Type] [ZK server] [No of elements] [Client type]
 </pre>
-<a name="Queue+test"></a>
-<h3 class="h4">Queue test</h3>
-<p>Start a producer to create 100 elements</p>
-<pre class="code">
+            <a name="Queue+test"></a>
+            <h3 class="h4">Queue test</h3>
+            <p>Start a producer to create 100 elements</p>
+            <pre class="code">
 java SyncPrimitive qTest localhost 100 p
 </pre>
-<p>Start a consumer to consume 100 elements</p>
-<pre class="code">
+            <p>Start a consumer to consume 100 elements</p>
+            <pre class="code">
 java SyncPrimitive qTest localhost 100 c
 </pre>
-<a name="Barrier+test"></a>
-<h3 class="h4">Barrier test</h3>
-<p>Start a barrier with 2 participants (start as many times as many participants you'd like to enter)</p>
-<pre class="code">
+            <a name="Barrier+test"></a>
+            <h3 class="h4">Barrier test</h3>
+            <p>Start a barrier with 2 participants (start as many times as many participants you'd like to enter)</p>
+            <pre class="code">
 java SyncPrimitive bTest localhost 2
 </pre>
-<a name="sc_sourceListing"></a>
-<h3 class="h4">Source Listing</h3>
-<div class="note example">
-<div class="label">SyncPrimitive.Java</div>
-<div class="content">
+            <a name="sc_sourceListing"></a>
+            <h3 class="h4">Source Listing</h3>
+            <div class="note example">
+                <div class="label">SyncPrimitive.Java</div>
+                <div class="content">
 
-<title>SyncPrimitive.Java</title>
+                    <title>SyncPrimitive.Java</title>
 
-<pre class="code">
+                    <pre class="code">
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -890,36 +900,36 @@ public class SyncPrimitive implements Watcher {
     }
 }
 </pre>
-</div>
-</div>
-</div>
+                </div>
+            </div>
+        </div>
 
 
-<p align="right">
-<font size="-2"></font>
-</p>
-</div>
-<!--+
-    |end content
-    +-->
-<div class="clearboth">&nbsp;</div>
+        <p align="right">
+            <font size="-2"></font>
+        </p>
+    </div>
+    <!--+
+        |end content
+        +-->
+    <div class="clearboth">&nbsp;</div>
 </div>
 <div id="footer">
-<!--+
-    |start bottomstrip
-    +-->
-<div class="lastmodified">
-<script type="text/javascript"><!--
-document.write("Last Published: " + document.lastModified);
-//  --></script>
-</div>
-<div class="copyright">
+    <!--+
+        |start bottomstrip
+        +-->
+    <div class="lastmodified">
+        <script type="text/javascript"><!--
+        document.write("Last Published: " + document.lastModified);
+        //  --></script>
+    </div>
+    <div class="copyright">
         Copyright &copy;
-          <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
-</div>
-<!--+
-    |end bottomstrip
-    +-->
+        <a href="http://www.apache.org/licenses/">The Apache Software Foundation.</a>
+    </div>
+    <!--+
+        |end bottomstrip
+        +-->
 </div>
 </body>
 </html>

@@ -18,44 +18,44 @@
 -->
 
 <project name="zkperl" default="compile">
-  <import file="../build-contrib.xml"/>
+    <import file="../build-contrib.xml"/>
 
-  <target name="init" depends="check-contrib" unless="skip.contrib">
-    <echo message="contrib: ${name}"/>
-    <mkdir dir="${build.dir}"/>
-    <antcall target="init-contrib"/>
-  </target>
+    <target name="init" depends="check-contrib" unless="skip.contrib">
+        <echo message="contrib: ${name}"/>
+        <mkdir dir="${build.dir}"/>
+        <antcall target="init-contrib"/>
+    </target>
 
-  <target name="compile" depends="init" unless="skip.contrib">
-    <echo message="contrib: ${name}"/>
+    <target name="compile" depends="init" unless="skip.contrib">
+        <echo message="contrib: ${name}"/>
 
-    <mkdir dir="${build.dir}"/>
-    <copy todir="${build.dir}">
-      <fileset dir="${basedir}">
-        <exclude name="**/VERSION"/>
-      </fileset>
-    </copy>
-    <exec executable="echo" output="${build.dir}/VERSION">
-      <arg line="${version}" />
-    </exec>
-  </target>
+        <mkdir dir="${build.dir}"/>
+        <copy todir="${build.dir}">
+            <fileset dir="${basedir}">
+                <exclude name="**/VERSION"/>
+            </fileset>
+        </copy>
+        <exec executable="echo" output="${build.dir}/VERSION">
+            <arg line="${version}"/>
+        </exec>
+    </target>
 
-	<target name="jar" depends="compile" >
-		<echo message="No jar target defined for this package"/>
-	</target>
+    <target name="jar" depends="compile">
+        <echo message="No jar target defined for this package"/>
+    </target>
 
- 	<target name="test">
-        <echo message="No test target defined for this package" />
+    <target name="test">
+        <echo message="No test target defined for this package"/>
     </target>
 
 
-  <target name="package" depends="compile" unless="skip.contrib">
-    <echo message="contrib: ${name}"/>
+    <target name="package" depends="compile" unless="skip.contrib">
+        <echo message="contrib: ${name}"/>
 
-    <mkdir dir="${dist.dir}/contrib/${name}"/>
-    <copy todir="${dist.dir}/contrib/${name}">
-      <fileset dir="${build.dir}"/>
-    </copy>
-  </target>
+        <mkdir dir="${dist.dir}/contrib/${name}"/>
+        <copy todir="${dist.dir}/contrib/${name}">
+            <fileset dir="${build.dir}"/>
+        </copy>
+    </target>
 
 </project>

@@ -21,28 +21,27 @@
  * <script type="text/javascript" language="JavaScript" src="menu.js"></script>
  */
 
-if (document.getElementById){ 
-  document.write('<style type="text/css">.menuitemgroup{display: none;}</style>')
+if (document.getElementById) {
+    document.write('<style type="text/css">.menuitemgroup{display: none;}</style>')
 }
 
-function SwitchMenu(obj)
-{
-  if(document.getElementById)  {
-    var el = document.getElementById(obj);
-    var title = document.getElementById(obj+'Title');
+function SwitchMenu(obj) {
+    if (document.getElementById) {
+        var el = document.getElementById(obj);
+        var title = document.getElementById(obj + 'Title');
 
-    if(obj.indexOf("_selected_")==0&&el.style.display == ""){
-      el.style.display = "block";
-      title.className = "pagegroupselected";
-    }
+        if (obj.indexOf("_selected_") == 0 && el.style.display == "") {
+            el.style.display = "block";
+            title.className = "pagegroupselected";
+        }
 
-    if(el.style.display != "block"){
-      el.style.display = "block";
-      title.className = "pagegroupopen";
-    }
-    else{
-      el.style.display = "none";
-      title.className = "pagegroup";
-    }
-  }// end -  if(document.getElementById) 
+        if (el.style.display != "block") {
+            el.style.display = "block";
+            title.className = "pagegroupopen";
+        }
+        else {
+            el.style.display = "none";
+            title.className = "pagegroup";
+        }
+    }// end -  if(document.getElementById) 
 }//end - function SwitchMenu(obj)

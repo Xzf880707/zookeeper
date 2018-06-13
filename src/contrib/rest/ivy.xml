@@ -18,31 +18,31 @@
 <ivy-module version="2.0"
             xmlns:e="http://ant.apache.org/ivy/extra">
 
-  <info organisation="org.apache.zookeeper"
-        module="${name}" revision="${version}">
-    <license name="Apache 2.0"/>
-    <ivyauthor name="Apache ZooKeeper" url="http://zookeeper.apache.org"/>
-    <description>ZooKeeper REST</description>
-  </info>
+    <info organisation="org.apache.zookeeper"
+          module="${name}" revision="${version}">
+        <license name="Apache 2.0"/>
+        <ivyauthor name="Apache ZooKeeper" url="http://zookeeper.apache.org"/>
+        <description>ZooKeeper REST</description>
+    </info>
 
-  <configurations defaultconfmapping="default">
-    <conf name="default"/>
-    <conf name="test"/>
-  </configurations>
+    <configurations defaultconfmapping="default">
+        <conf name="default"/>
+        <conf name="test"/>
+    </configurations>
 
-  <dependencies>
-    <dependency org="org.slf4j" name="slf4j-api" rev="1.7.5"/>
-    <dependency org="org.slf4j" name="slf4j-log4j12" rev="1.7.5" transitive="false"/>
-  
-    <!-- transitive false turns off dependency checking, log4j deps seem borked -->
-    <dependency org="log4j" name="log4j" rev="1.2.17" transitive="false"/>
-    <dependency org="asm" name="asm" rev="3.1" />
-    <dependency org="com.sun.grizzly" name="grizzly-servlet-webserver" rev="1.9.8" />
-    <dependency org="com.sun.jersey" name="jersey-server" rev="1.1.5.1" />
-    <dependency org="com.sun.jersey" name="jersey-json" rev="1.1.5.1" />
+    <dependencies>
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.7.5"/>
+        <dependency org="org.slf4j" name="slf4j-log4j12" rev="1.7.5" transitive="false"/>
 
-    <dependency org="junit" name="junit" rev="4.12" conf="test->default"/>
-    <dependency org="com.sun.jersey" name="jersey-client" rev="1.1.5.1" conf="test->default"/>
-  </dependencies>
+        <!-- transitive false turns off dependency checking, log4j deps seem borked -->
+        <dependency org="log4j" name="log4j" rev="1.2.17" transitive="false"/>
+        <dependency org="asm" name="asm" rev="3.1"/>
+        <dependency org="com.sun.grizzly" name="grizzly-servlet-webserver" rev="1.9.8"/>
+        <dependency org="com.sun.jersey" name="jersey-server" rev="1.1.5.1"/>
+        <dependency org="com.sun.jersey" name="jersey-json" rev="1.1.5.1"/>
+
+        <dependency org="junit" name="junit" rev="4.12" conf="test->default"/>
+        <dependency org="com.sun.jersey" name="jersey-client" rev="1.1.5.1" conf="test->default"/>
+    </dependencies>
 
 </ivy-module>

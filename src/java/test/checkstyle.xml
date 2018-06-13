@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE module PUBLIC
-    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
-    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+        "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
 <!--
    Licensed to the Apache Software Foundation (ASF) under one or more
@@ -70,8 +70,8 @@
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocType">
-          <property name="scope" value="public"/>
-          <property name="allowMissingParamTags" value="true"/>
+            <property name="scope" value="public"/>
+            <property name="allowMissingParamTags" value="true"/>
         </module>
         <module name="JavadocStyle"/>
 
@@ -91,15 +91,15 @@
         <!-- Checks for Headers                                -->
         <!-- See http://checkstyle.sf.net/config_header.html   -->
         <!-- <module name="Header">                            -->
-            <!-- The follow property value demonstrates the ability     -->
-            <!-- to have access to ANT properties. In this case it uses -->
-            <!-- the ${basedir} property to allow Checkstyle to be run  -->
-            <!-- from any directory within a project. See property      -->
-            <!-- expansion,                                             -->
-            <!-- http://checkstyle.sf.net/config.html#properties        -->
-            <!-- <property                                              -->
-            <!--     name="headerFile"                                  -->
-            <!--     value="${basedir}/java.header"/>                   -->
+        <!-- The follow property value demonstrates the ability     -->
+        <!-- to have access to ANT properties. In this case it uses -->
+        <!-- the ${basedir} property to allow Checkstyle to be run  -->
+        <!-- from any directory within a project. See property      -->
+        <!-- expansion,                                             -->
+        <!-- http://checkstyle.sf.net/config.html#properties        -->
+        <!-- <property                                              -->
+        <!--     name="headerFile"                                  -->
+        <!--     value="${basedir}/java.header"/>                   -->
         <!-- </module> -->
 
         <!-- Following interprets the header file as regular expressions. -->
@@ -116,7 +116,7 @@
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
         <module name="LineLength">
-          <property name="ignorePattern" value="^import"/>
+            <property name="ignorePattern" value="^import"/>
         </module>
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
@@ -131,8 +131,8 @@
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter">
-	    	<property name="tokens" value="COMMA, SEMI"/>
-		</module>
+            <property name="tokens" value="COMMA, SEMI"/>
+        </module>
 
 
         <!-- Modifier Checks                                    -->
@@ -156,7 +156,7 @@
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
         <module name="HiddenField">
-          <property name="ignoreConstructorParameter" value="true"/>
+            <property name="ignoreConstructorParameter" value="true"/>
         </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
@@ -176,9 +176,9 @@
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="ArrayTypeStyle"/>
         <module name="Indentation">
-            <property name="basicOffset" value="4" />
-            <property name="caseIndent" value="0" />
-        </module> 
+            <property name="basicOffset" value="4"/>
+            <property name="caseIndent" value="0"/>
+        </module>
         <module name="TodoComment"/>
         <module name="UpperEll"/>
 

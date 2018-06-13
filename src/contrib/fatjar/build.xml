@@ -18,57 +18,57 @@
 -->
 
 <project name="fatjar" default="jar">
-  <import file="../build-contrib.xml"/>
+    <import file="../build-contrib.xml"/>
 
-  <target name="setjarname">
-    <property name="jarname"
-              value="${build.dir}/zookeeper-${version}-${name}.jar"/>
-  </target>
+    <target name="setjarname">
+        <property name="jarname"
+                  value="${build.dir}/zookeeper-${version}-${name}.jar"/>
+    </target>
 
-  <!-- Override jar target to specify main class -->
-  <target name="jar" depends="checkMainCompiled, setjarname, compile">
-    <echo message="contrib: ${name}"/>
-    <jar jarfile="${jarname}">
-      <manifest>
-        <attribute name="Main-Class" value="org.apache.zookeeper.util.FatJarMain" />
-        <attribute name="Built-By" value="${user.name}"/>
-        <attribute name="Built-At" value="${build.time}"/>
-        <attribute name="Built-On" value="${host.name}" />
-        <attribute name="Implementation-Title" value="org.apache.zookeeper"/>
-        <attribute name="Implementation-Version" value="${revision}"/>
-        <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
-      </manifest>
-      <fileset file="${basedir}/conf/mainClasses" />
-      <fileset dir="${build.classes}"/>
-      <fileset dir="${build.test}"/>
-      <fileset file="${zk.root}/LICENSE.txt" />
-      <fileset file="${zk.root}/conf/log4j.properties" />
-      <fileset dir="${zk.root}/build/classes" excludes="**/.generated"/>
-      <fileset dir="${zk.root}/build/test/classes"/>
-      <zipgroupfileset dir="${zk.root}/build/lib" includes="*.jar" />
-      <zipgroupfileset dir="${zk.root}/build/test/lib" includes="*.jar" />
-      <zipgroupfileset dir="${zk.root}/src/java/lib" includes="*.jar" />
-    </jar>
-  </target>
+    <!-- Override jar target to specify main class -->
+    <target name="jar" depends="checkMainCompiled, setjarname, compile">
+        <echo message="contrib: ${name}"/>
+        <jar jarfile="${jarname}">
+            <manifest>
+                <attribute name="Main-Class" value="org.apache.zookeeper.util.FatJarMain"/>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Built-At" value="${build.time}"/>
+                <attribute name="Built-On" value="${host.name}"/>
+                <attribute name="Implementation-Title" value="org.apache.zookeeper"/>
+                <attribute name="Implementation-Version" value="${revision}"/>
+                <attribute name="Implementation-Vendor" value="The Apache Software Foundation"/>
+            </manifest>
+            <fileset file="${basedir}/conf/mainClasses"/>
+            <fileset dir="${build.classes}"/>
+            <fileset dir="${build.test}"/>
+            <fileset file="${zk.root}/LICENSE.txt"/>
+            <fileset file="${zk.root}/conf/log4j.properties"/>
+            <fileset dir="${zk.root}/build/classes" excludes="**/.generated"/>
+            <fileset dir="${zk.root}/build/test/classes"/>
+            <zipgroupfileset dir="${zk.root}/build/lib" includes="*.jar"/>
+            <zipgroupfileset dir="${zk.root}/build/test/lib" includes="*.jar"/>
+            <zipgroupfileset dir="${zk.root}/src/java/lib" includes="*.jar"/>
+        </jar>
+    </target>
 
-  <target name="package" depends="jar, zookeeperbuildcontrib.package"
-          unless="skip.contrib">
+    <target name="package" depends="jar, zookeeperbuildcontrib.package"
+            unless="skip.contrib">
 
-    <copy file="${basedir}/build.xml" todir="${dist.dir}/contrib/${name}"/>
+        <copy file="${basedir}/build.xml" todir="${dist.dir}/contrib/${name}"/>
 
-    <mkdir dir="${dist.dir}/contrib/${name}/conf"/>
-    <copy todir="${dist.dir}/contrib/${name}/conf">
-      <fileset dir="${basedir}/conf"/>
-    </copy>
+        <mkdir dir="${dist.dir}/contrib/${name}/conf"/>
+        <copy todir="${dist.dir}/contrib/${name}/conf">
+            <fileset dir="${basedir}/conf"/>
+        </copy>
 
-    <mkdir dir="${dist.dir}/contrib/${name}/src"/>
-    <copy todir="${dist.dir}/contrib/${name}/src">
-      <fileset dir="${basedir}/src"/>
-    </copy>
-  </target>
+        <mkdir dir="${dist.dir}/contrib/${name}/src"/>
+        <copy todir="${dist.dir}/contrib/${name}/src">
+            <fileset dir="${basedir}/src"/>
+        </copy>
+    </target>
 
-	<target name="test">
-		<echo message="No test target defined for this package" />
-	</target>
+    <target name="test">
+        <echo message="No test target defined for this package"/>
+    </target>
 </project>
 

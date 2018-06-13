@@ -28,9 +28,11 @@
  *
  * Implement it - courtesy to fritz.
  */
-var abc	= new Array();
+var abc = new Array();
 if (!abc.push) {
-  Array.prototype.push	= function(what){this[this.length]=what}
+    Array.prototype.push = function (what) {
+        this[this.length] = what
+    }
 }
 
 /* ========================================================================
@@ -53,15 +55,15 @@ var href1 = "@skinconfig.trail.link1.href@";
 var href2 = "@skinconfig.trail.link2.href@";
 var href3 = "@skinconfig.trail.link3.href@";
 
-   if(!(link1=="")&&!link1.indexOf( "@" ) == 0){
-     PREPREND_CRUMBS.push( new Array( link1, href1 ) );
-   }
-   if(!(link2=="")&&!link2.indexOf( "@" ) == 0){
-     PREPREND_CRUMBS.push( new Array( link2, href2 ) );
-   }
-   if(!(link3=="")&&!link3.indexOf( "@" ) == 0){
-     PREPREND_CRUMBS.push( new Array( link3, href3 ) );
-   }
+if (!(link1 == "") && !link1.indexOf("@") == 0) {
+    PREPREND_CRUMBS.push(new Array(link1, href1));
+}
+if (!(link2 == "") && !link2.indexOf("@") == 0) {
+    PREPREND_CRUMBS.push(new Array(link2, href2));
+}
+if (!(link3 == "") && !link3.indexOf("@") == 0) {
+    PREPREND_CRUMBS.push(new Array(link3, href3));
+}
 
 /**
  * String to include between crumbs:
@@ -96,7 +98,7 @@ var CSS_CLASS_SEPARATOR = "crumbSeparator";
  * determine what part of the url to ignore (if it contains one of the
  * string specified here, we ignore it).
  */
-var FILE_EXTENSIONS = new Array( ".html", ".htm", ".jsp", ".php", ".php3", ".php4" );
+var FILE_EXTENSIONS = new Array(".html", ".htm", ".jsp", ".php", ".php3", ".php4");
 
 /**
  * String that separates parts of the breadcrumb trail from each other.
@@ -111,33 +113,30 @@ var PATH_SEPARATOR = "/";
  * Capitalize first letter of the provided string and return the modified
  * string.
  */
-function sentenceCase( string )
-{        return string;
-	//var lower = string.toLowerCase();
-	//return lower.substr(0,1).toUpperCase() + lower.substr(1);
+function sentenceCase(string) {
+    return string;
+    //var lower = string.toLowerCase();
+    //return lower.substr(0,1).toUpperCase() + lower.substr(1);
 }
 
 /**
  * Returns an array containing the names of all the directories in the
  * current document URL
  */
-function getDirectoriesInURL()
-{
-	var trail = document.location.pathname.split( PATH_SEPARATOR );
+function getDirectoriesInURL() {
+    var trail = document.location.pathname.split(PATH_SEPARATOR);
 
-	// check whether last section is a file or a directory
-	var lastcrumb = trail[trail.length-1];
-	for( var i = 0; i < FILE_EXTENSIONS.length; i++ )
-	{
-		if( lastcrumb.indexOf( FILE_EXTENSIONS[i] ) )
-		{
-			// it is, remove it and send results
-			return trail.slice( 1, trail.length-1 );
-		}
-	}
+    // check whether last section is a file or a directory
+    var lastcrumb = trail[trail.length - 1];
+    for (var i = 0; i < FILE_EXTENSIONS.length; i++) {
+        if (lastcrumb.indexOf(FILE_EXTENSIONS[i])) {
+            // it is, remove it and send results
+            return trail.slice(1, trail.length - 1);
+        }
+    }
 
-	// it's not; send the trail unmodified
-	return trail.slice( 1, trail.length );
+    // it's not; send the trail unmodified
+    return trail.slice(1, trail.length);
 }
 
 /* ========================================================================
@@ -147,78 +146,68 @@ function getDirectoriesInURL()
  * Return a two-dimensional array describing the breadcrumbs based on the
  * array of directories passed in.
  */
-function getBreadcrumbs( dirs )
-{
-	var prefix = "/";
-	var postfix = "/";
+function getBreadcrumbs(dirs) {
+    var prefix = "/";
+    var postfix = "/";
 
-	// the array we will return
-	var crumbs = new Array();
+    // the array we will return
+    var crumbs = new Array();
 
-	if( dirs != null )
-	{
-		for( var i = 0; i < dirs.length; i++ )
-		{
-			prefix += dirs[i] + postfix;
-			crumbs.push( new Array( dirs[i], prefix ) );
-		}
-	}
+    if (dirs != null) {
+        for (var i = 0; i < dirs.length; i++) {
+            prefix += dirs[i] + postfix;
+            crumbs.push(new Array(dirs[i], prefix));
+        }
+    }
 
-	// preprend the PREPREND_CRUMBS
-	if(PREPREND_CRUMBS.length > 0 )
-	{
-		return PREPREND_CRUMBS.concat( crumbs );
-	}
+    // preprend the PREPREND_CRUMBS
+    if (PREPREND_CRUMBS.length > 0) {
+        return PREPREND_CRUMBS.concat(crumbs);
+    }
 
-	return crumbs;
+    return crumbs;
 }
 
 /**
  * Return a string containing a simple text breadcrumb trail based on the
  * two-dimensional array passed in.
  */
-function getCrumbTrail( crumbs )
-{
-	var xhtml = DISPLAY_PREPREND;
+function getCrumbTrail(crumbs) {
+    var xhtml = DISPLAY_PREPREND;
 
-	for( var i = 0; i < crumbs.length; i++ )
-	{
-		xhtml += '<a href="' + crumbs[i][1] + '" >';
-		xhtml += unescape( crumbs[i][0] ) + '</a>';
-		if( i != (crumbs.length-1) )
-		{
-			xhtml += DISPLAY_SEPARATOR;
-		}
-	}
+    for (var i = 0; i < crumbs.length; i++) {
+        xhtml += '<a href="' + crumbs[i][1] + '" >';
+        xhtml += unescape(crumbs[i][0]) + '</a>';
+        if (i != (crumbs.length - 1)) {
+            xhtml += DISPLAY_SEPARATOR;
+        }
+    }
 
-	xhtml += DISPLAY_POSTPREND;
+    xhtml += DISPLAY_POSTPREND;
 
-	return xhtml;
+    return xhtml;
 }
 
 /**
  * Return a string containing an XHTML breadcrumb trail based on the
  * two-dimensional array passed in.
  */
-function getCrumbTrailXHTML( crumbs )
-{
-	var xhtml = '<span class="' + CSS_CLASS_TRAIL  + '">';
-	xhtml += DISPLAY_PREPREND;
+function getCrumbTrailXHTML(crumbs) {
+    var xhtml = '<span class="' + CSS_CLASS_TRAIL + '">';
+    xhtml += DISPLAY_PREPREND;
 
-	for( var i = 0; i < crumbs.length; i++ )
-	{
-		xhtml += '<a href="' + crumbs[i][1] + '" class="' + CSS_CLASS_CRUMB + '">';
-		xhtml += unescape( crumbs[i][0] ) + '</a>';
-		if( i != (crumbs.length-1) )
-		{
-			xhtml += '<span class="' + CSS_CLASS_SEPARATOR + '">' + DISPLAY_SEPARATOR + '</span>';
-		}
-	}
+    for (var i = 0; i < crumbs.length; i++) {
+        xhtml += '<a href="' + crumbs[i][1] + '" class="' + CSS_CLASS_CRUMB + '">';
+        xhtml += unescape(crumbs[i][0]) + '</a>';
+        if (i != (crumbs.length - 1)) {
+            xhtml += '<span class="' + CSS_CLASS_SEPARATOR + '">' + DISPLAY_SEPARATOR + '</span>';
+        }
+    }
 
-	xhtml += DISPLAY_POSTPREND;
-	xhtml += '</span>';
+    xhtml += DISPLAY_POSTPREND;
+    xhtml += '</span>';
 
-	return xhtml;
+    return xhtml;
 }
 
 /* ========================================================================
@@ -226,12 +215,10 @@ function getCrumbTrailXHTML( crumbs )
    ======================================================================== */
 
 // check if we're local; if so, only print the PREPREND_CRUMBS
-if( document.location.href.toLowerCase().indexOf( "http://" ) == -1 )
-{
-	document.write( getCrumbTrail( getBreadcrumbs() ) );
+if (document.location.href.toLowerCase().indexOf("http://") == -1) {
+    document.write(getCrumbTrail(getBreadcrumbs()));
 }
-else
-{
-	document.write( getCrumbTrail( getBreadcrumbs( getDirectoriesInURL() ) ) );
+else {
+    document.write(getCrumbTrail(getBreadcrumbs(getDirectoriesInURL())));
 }
 

@@ -18,44 +18,44 @@
 -->
 
 <project name="zookeeperrecipes" default="compile" basedir=".">
-  
-  <!-- In case one of the contrib subdirectories -->
-  <!-- fails the build or test targets and you cannot fix it: -->
-  <!-- Then add to fileset: excludes="badcontrib/build.xml" -->
 
-  <!-- ====================================================== -->
-  <!-- Compile contribs.                                      -->
-  <!-- ====================================================== -->
-  <target name="compile">
-    <subant target="jar">
-      <fileset dir="." includes="*/build.xml"/>
-    </subant>
-  </target>
-  
-  <!-- ====================================================== -->
-  <!-- Package contrib jars.                                  -->
-  <!-- ====================================================== -->
-  <target name="package">
-    <subant target="package">
-      <fileset dir="." includes="*/build.xml"/>
-    </subant>
-  </target>
-  
-  <!-- ====================================================== -->
-  <!-- Test all the contribs.                               -->
-  <!-- ====================================================== -->
-  <target name="test">
-    <subant target="test">
-      <fileset dir="." includes="*/build.xml"/>
-    </subant>
-  </target>
-  
-  <!-- ====================================================== -->
-  <!-- Clean all the contribs.                              -->
-  <!-- ====================================================== -->
-  <target name="clean">
-    <subant target="clean">
-      <fileset dir="." includes="*/build.xml"/>
-    </subant>
-  </target>
+    <!-- In case one of the contrib subdirectories -->
+    <!-- fails the build or test targets and you cannot fix it: -->
+    <!-- Then add to fileset: excludes="badcontrib/build.xml" -->
+
+    <!-- ====================================================== -->
+    <!-- Compile contribs.                                      -->
+    <!-- ====================================================== -->
+    <target name="compile">
+        <subant target="jar">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+
+    <!-- ====================================================== -->
+    <!-- Package contrib jars.                                  -->
+    <!-- ====================================================== -->
+    <target name="package">
+        <subant target="package">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+
+    <!-- ====================================================== -->
+    <!-- Test all the contribs.                               -->
+    <!-- ====================================================== -->
+    <target name="test">
+        <subant target="test">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
+
+    <!-- ====================================================== -->
+    <!-- Clean all the contribs.                              -->
+    <!-- ====================================================== -->
+    <target name="clean">
+        <subant target="clean">
+            <fileset dir="." includes="*/build.xml"/>
+        </subant>
+    </target>
 </project>

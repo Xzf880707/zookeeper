@@ -113,12 +113,15 @@ public class QuorumPeerMain {
             config.parse(args[0]);
         }
 
-        // Start and schedule the the purge task
+        //创建文件清理管理器，该清理器负责定期清理内存快照文件和日志文件
+        //snapRetainCount：至少保留文件个数
+        //purgeInterval：定时任务间隔时间，只有purgeInterval大于0，该文件清理器才会创建文件清理的定时任务
         DatadirCleanupManager purgeMgr = new DatadirCleanupManager(config
                 .getDataDir(), config.getDataLogDir(), config
                 .getSnapRetainCount(), config.getPurgeInterval());
         purgeMgr.start();
-
+        //quorumVerifier!=null && (!standaloneEnabled || quorumVerifier.getVotingMembers().size() > 1);
+        //上面表示如果是集群配置的话，服务器已集群方式启动
         if (args.length == 1 && config.isDistributed()) {
             runFromConfig(config);
         } else {
@@ -140,16 +143,20 @@ public class QuorumPeerMain {
 
       LOG.info("Starting quorum peer");
       try {
+          //创建ServerCnxnFactory主要负责进行跟客户端进行网络通信，包括接收客户端事务提交等，默认采用NIO。
+          // 可以通过配置系统参数zookeeper.serverCnxnFactory来配置它实际实现的方式
+          //我们可以为该ServerCnxnFactory配置相应的参数来监控并控制客户端的访问
+          //ClientPort：客户端发送请求的端口
+          //maxClientCnxns：最大并发数，用来控制客户端高并发
           ServerCnxnFactory cnxnFactory = null;
           ServerCnxnFactory secureCnxnFactory = null;
-
+          //zoo.cfg是否配置clientPortAddress
           if (config.getClientPortAddress() != null) {
               cnxnFactory = ServerCnxnFactory.createFactory();
               cnxnFactory.configure(config.getClientPortAddress(),
                       config.getMaxClientCnxns(),
                       false);
           }
-
           if (config.getSecureClientPortAddress() != null) {
               secureCnxnFactory = ServerCnxnFactory.createFactory();
               secureCnxnFactory.configure(config.getSecureClientPortAddress(),
@@ -158,6 +165,8 @@ public class QuorumPeerMain {
           }
 
           quorumPeer = getQuorumPeer();
+          //创建内存快照文件和事务文件日志文件的管理器FileTxnSnapLog，该管理器提供了zookeeper上层服务跟底层数据库存储的对接入口，
+          // 他提供了一系列接口，用来访问日志文件和内存快站文件（具体提供了哪些访问底层存储文件的方法，我们后面会单独抽出来探究一番）
           quorumPeer.setTxnFactory(new FileTxnSnapLog(
                       config.getDataLogDir(),
                       config.getDataDir()));
@@ -167,22 +176,24 @@ public class QuorumPeerMain {
           //quorumPeer.setQuorumPeers(config.getAllMembers());
           quorumPeer.setElectionType(config.getElectionAlg());
           quorumPeer.setMyid(config.getServerId());
-          quorumPeer.setTickTime(config.getTickTime());
-          quorumPeer.setMinSessionTimeout(config.getMinSessionTimeout());
-          quorumPeer.setMaxSessionTimeout(config.getMaxSessionTimeout());
-          quorumPeer.setInitLimit(config.getInitLimit());
-          quorumPeer.setSyncLimit(config.getSyncLimit());
+          quorumPeer.setTickTime(config.getTickTime());//设置心跳时间
+          quorumPeer.setMinSessionTimeout(config.getMinSessionTimeout());//设置最小超时时间
+          quorumPeer.setMaxSessionTimeout(config.getMaxSessionTimeout());//设置最小超时时间
+          quorumPeer.setInitLimit(config.getInitLimit());//初时心跳次数
+          quorumPeer.setSyncLimit(config.getSyncLimit());//同步心跳次数
           quorumPeer.setConfigFileName(config.getConfigFilename());
+          //创建内存数据库ZKDatabase实例，创建该数据库内存实例时会注入一个DataTree，
+          // DataTree为内存数据库内真正作为保存内存数据的数据结构，维护了整个内存数据库中节点的数据结构，
+          // 同时在创建DataTree时候会初始化创建根路径/zookeeper和配额管理节点/zookeeper/quota
           quorumPeer.setZKDatabase(new ZKDatabase(quorumPeer.getTxnFactory()));
           quorumPeer.setQuorumVerifier(config.getQuorumVerifier(), false);
           if (config.getLastSeenQuorumVerifier()!=null) {
               quorumPeer.setLastSeenQuorumVerifier(config.getLastSeenQuorumVerifier(), false);
           }
+          //初始化QuorumPeer的一些其它属性，包括quorumCnxnThreadsSize（线程池QuerumServer manager线程池的初始线程数）
           quorumPeer.initConfigInZKDatabase();
           quorumPeer.setCnxnFactory(cnxnFactory);
-          quorumPeer.setSecureCnxnFactory(secureCnxnFactory);
-          quorumPeer.setLearnerType(config.getPeerType());
-          quorumPeer.setSyncEnabled(config.getSyncEnabled());
+          ...
           quorumPeer.setQuorumListenOnAllIPs(config.getQuorumListenOnAllIPs());
 
           // sets quorum sasl authentication configurations
@@ -194,9 +205,10 @@ public class QuorumPeerMain {
               quorumPeer.setQuorumServerLoginContext(config.quorumServerLoginContext);
               quorumPeer.setQuorumLearnerLoginContext(config.quorumLearnerLoginContext);
           }
+          //
           quorumPeer.setQuorumCnxnThreadsSize(config.quorumCnxnThreadsSize);
           quorumPeer.initialize();
-          
+          //启动quorumPeer并开始投票选举
           quorumPeer.start();
           quorumPeer.join();
       } catch (InterruptedException e) {

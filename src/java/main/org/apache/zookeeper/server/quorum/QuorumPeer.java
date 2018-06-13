@@ -846,10 +846,13 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
 
     @Override
     public synchronized void start() {
+        //判断集群配置是否包含本机myid
         if (!getView().containsKey(myid)) {
             throw new RuntimeException("My id " + myid + " not in the peer list");
          }
+         //恢复内存数据库的数据
         loadDataBase();
+        //启动网络通信服务，并监听客户端的事务请求
         startServerCnxnFactory();
         try {
             adminServer.start();
@@ -857,7 +860,9 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
             LOG.warn("Problem starting AdminServer", e);
             System.out.println(e);
         }
+        //开始进行leader选举
         startLeaderElection();
+        //启动当前线程(QuorumPeer本身也是一个线程).具体run做了哪些，我们后面会单独讨论,只需要知道它主要用来统计票数,更新节点服务器的状态
         super.start();
     }
 
@@ -912,6 +917,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     }
     synchronized public void startLeaderElection() {
         try {
+            //如果当前节点的状态是looking状态，初始化创建节点本地选票
             if (getPeerState() == ServerState.LOOKING) {
                 currentVote = new Vote(myid, getLastLoggedZxid(), getCurrentEpoch());
             }
@@ -920,7 +926,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
             re.setStackTrace(e.getStackTrace());
             throw re;
         }
-
+        //创建选举算法
         this.electionAlg = createElectionAlgorithm(electionType);
     }
 
@@ -2057,7 +2063,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     private boolean isQuorumLearnerSaslAuthRequired() {
         return quorumLearnerSaslAuthRequired;
     }
-
+    //创建节点管理器
     public QuorumCnxManager createCnxnManager() {
         return new QuorumCnxManager(this,
                 this.getId(),

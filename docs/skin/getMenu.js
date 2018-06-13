@@ -21,25 +21,24 @@
  * <script type="text/javascript" language="JavaScript" src="menu.js"></script>
  */
 
-if (document.getElementById){ 
-  document.write('<style type="text/css">.menuitemgroup{display: none;}</style>')
+if (document.getElementById) {
+    document.write('<style type="text/css">.menuitemgroup{display: none;}</style>')
 }
 
 
-function SwitchMenu(obj, thePath)
-{
-var open = 'url("'+thePath + 'images/chapter_open.gif")';
-var close = 'url("'+thePath + 'images/chapter.gif")';
-  if(document.getElementById)  {
-    var el = document.getElementById(obj);
-    var title = document.getElementById(obj+'Title');
+function SwitchMenu(obj, thePath) {
+    var open = 'url("' + thePath + 'images/chapter_open.gif")';
+    var close = 'url("' + thePath + 'images/chapter.gif")';
+    if (document.getElementById) {
+        var el = document.getElementById(obj);
+        var title = document.getElementById(obj + 'Title');
 
-    if(el.style.display != "block"){ 
-      title.style.backgroundImage = open;
-      el.style.display = "block";
-    }else{
-      title.style.backgroundImage = close;
-      el.style.display = "none";
-    }
-  }// end -  if(document.getElementById) 
+        if (el.style.display != "block") {
+            title.style.backgroundImage = open;
+            el.style.display = "block";
+        } else {
+            title.style.backgroundImage = close;
+            el.style.display = "none";
+        }
+    }// end -  if(document.getElementById) 
 }//end - function SwitchMenu(obj)

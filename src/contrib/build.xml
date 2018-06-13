@@ -19,52 +19,52 @@
 
 <project name="zookeepercontrib" default="compile" basedir=".">
 
-  <property name="contribfilesetincludes" value="*/build.xml" />
-  <property name="contribfilesetexcludes" value="fatjar/build.xml" />
+    <property name="contribfilesetincludes" value="*/build.xml"/>
+    <property name="contribfilesetexcludes" value="fatjar/build.xml"/>
 
-  <fileset id="contribfileset" dir=".">
-    <include name="${contribfilesetincludes}"/>
-    <exclude name="${contribfilesetexcludes}"/>
-  </fileset>
+    <fileset id="contribfileset" dir=".">
+        <include name="${contribfilesetincludes}"/>
+        <exclude name="${contribfilesetexcludes}"/>
+    </fileset>
 
-  <!-- In case one of the contrib subdirectories -->
-  <!-- fails the build or test targets and you cannot fix it: -->
-  <!-- Then add to fileset: excludes="badcontrib/build.xml" -->
+    <!-- In case one of the contrib subdirectories -->
+    <!-- fails the build or test targets and you cannot fix it: -->
+    <!-- Then add to fileset: excludes="badcontrib/build.xml" -->
 
-  <!-- ====================================================== -->
-  <!-- Compile contribs.                                      -->
-  <!-- ====================================================== -->
-  <target name="compile">
-    <subant target="jar">
-      <fileset refid="contribfileset" />
-    </subant>
-  </target>
-  
-  <!-- ====================================================== -->
-  <!-- Package contrib jars.                                  -->
-  <!-- ====================================================== -->
-  <target name="package">
-    <subant target="package">
-      <fileset refid="contribfileset" />
-    </subant>
-  </target>
+    <!-- ====================================================== -->
+    <!-- Compile contribs.                                      -->
+    <!-- ====================================================== -->
+    <target name="compile">
+        <subant target="jar">
+            <fileset refid="contribfileset"/>
+        </subant>
+    </target>
 
-  <!-- ====================================================== -->
-  <!-- Test all the contribs.                               -->
-  <!-- ====================================================== -->
-  <target name="test">
-    <subant target="test">
-      <fileset refid="contribfileset" />
-    </subant>
-  </target>
-  
-  
-  <!-- ====================================================== -->
-  <!-- Clean all the contribs.                              -->
-  <!-- ====================================================== -->
-  <target name="clean">
-    <subant target="clean">
-      <fileset refid="contribfileset" />
-    </subant>
-  </target>
+    <!-- ====================================================== -->
+    <!-- Package contrib jars.                                  -->
+    <!-- ====================================================== -->
+    <target name="package">
+        <subant target="package">
+            <fileset refid="contribfileset"/>
+        </subant>
+    </target>
+
+    <!-- ====================================================== -->
+    <!-- Test all the contribs.                               -->
+    <!-- ====================================================== -->
+    <target name="test">
+        <subant target="test">
+            <fileset refid="contribfileset"/>
+        </subant>
+    </target>
+
+
+    <!-- ====================================================== -->
+    <!-- Clean all the contribs.                              -->
+    <!-- ====================================================== -->
+    <target name="clean">
+        <subant target="clean">
+            <fileset refid="contribfileset"/>
+        </subant>
+    </target>
 </project>

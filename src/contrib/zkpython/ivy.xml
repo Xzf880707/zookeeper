@@ -18,18 +18,18 @@
 <ivy-module version="2.0"
             xmlns:e="http://ant.apache.org/ivy/extra">
 
-  <info organisation="org.apache.zookeeper"
-        module="${name}" revision="${version}">
-    <license name="Apache 2.0"/>
-    <ivyauthor name="Apache ZooKeeper" url="http://zookeeper.apache.org"/>
-    <description>ZKPython</description>
-  </info>
+    <info organisation="org.apache.zookeeper"
+          module="${name}" revision="${version}">
+        <license name="Apache 2.0"/>
+        <ivyauthor name="Apache ZooKeeper" url="http://zookeeper.apache.org"/>
+        <description>ZKPython</description>
+    </info>
 
-  <configurations defaultconfmapping="default">
-    <conf name="default"/>
-    <conf name="test"/>
-    <conf name="jdiff" visibility="private"/>
-    <conf name="releaseaudit" visibility="private" description="Artifacts required for releaseaudit target"/>
-  </configurations>
+    <configurations defaultconfmapping="default">
+        <conf name="default"/>
+        <conf name="test"/>
+        <conf name="jdiff" visibility="private"/>
+        <conf name="releaseaudit" visibility="private" description="Artifacts required for releaseaudit target"/>
+    </configurations>
 
 </ivy-module>
